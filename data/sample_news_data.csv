@@ -1,0 +1,16 @@
+date,headline,source,sentiment_label,word_count
+2023-01-10,Central bank holds rates steady amid inflation concerns,Reuters,neutral,8
+2023-01-11,Mining sector reports strong quarterly earnings growth,Bloomberg,positive,7
+2023-01-12,Political uncertainty weighs on Chilean equity markets,Reuters,negative,7
+2023-01-13,Copper prices surge on strong China demand outlook,Reuters,positive,8
+2023-01-16,Peso weakens against dollar as investors seek safety,Bloomberg,negative,8
+2023-01-17,New infrastructure spending plan announced by government,FT,positive,7
+2023-01-18,Unemployment rises slightly in latest monthly report,Reuters,negative,7
+2023-01-19,Major bank posts record profits for the fiscal year,Bloomberg,positive,9
+2023-01-20,Trade deficit widens in December data release,Reuters,negative,7
+2023-01-23,Equity market reaches three-month high on optimism,Bloomberg,positive,7
+2023-01-24,Pension reform debate continues in national congress,Reuters,neutral,7
+2023-01-25,Retail sales growth beats analyst expectations,Bloomberg,positive,6
+2023-01-26,Mining union threatens strike action over wage dispute,Reuters,negative,8
+2023-01-27,GDP growth revised upward by international analysts,FT,positive,7
+2023-01-30,Foreign investment inflows increase significantly in Q4,Reuters,positive,7

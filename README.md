@@ -135,11 +135,11 @@ pip install -r requirements.txt
 
 ```bash
 python run_analysis.py
-```
 
 This downloads ECH data, computes all indicators, runs cross-validation,
 saves the two tables as CSVs, and saves all three figures as PNG files to
 the `outputs/` directory.
+```
 
 ### Step 2 — Launch the Streamlit dashboard
 
@@ -153,11 +153,14 @@ A public deployed version of the dashboard is also available here:
 [Streamlit Cloud App](https://abhishek-sharma-007-mscfe600-gwp1-app-xd483d.streamlit.app/)
 
 Open the URL shown in the terminal (usually `http://localhost:8501`).
+```
 
 ### Step 3 — Run the notebook
 
+```
 Open `notebooks/GWP1_Notebook.ipynb` in Google Colab or Jupyter and run
 all cells top to bottom.
+```
 
 ---
 
@@ -240,7 +243,6 @@ literature review.
 
 ---
 
-```markdown
 ## Screenshots
 
 ### Live Dashboard

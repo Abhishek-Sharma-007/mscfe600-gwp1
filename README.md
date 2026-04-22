@@ -149,59 +149,84 @@ all cells top to bottom.
 
 ### Part 1: ECH ETF Analysis
 
-**Dataset:** 3,476 trading days after cleaning | Target: ~51.3% up / ~48.7% down
+**Dataset:** 3,502 trading days after cleaning | Target: ~51.3% up / ~48.7% down
+
+**Figure 1 — ECH Adjusted Close Price with 14-Day SMA**
+
+![Figure 1](outputs/figure1_ech_sma14.png)
+
+*ECH adjusted close price (blue) with 14-day SMA overlay (orange), 2010–2023.
+Price ranged from approximately 14 USD (COVID low, March 2020) to ~55 USD (commodity peak, 2011).*
+
+---
+
+**Figure 2 — ECH 14-Day RSI with Overbought/Oversold Thresholds**
+
+![Figure 2](outputs/figure2_ech_rsi14.png)
+
+*14-day RSI (purple) with overbought threshold at 70 (red dashed) and oversold at 30 (green dashed).
+RSI repeatedly enters oversold territory during major stress events: 2015 commodity decline, 2019 social unrest, and the March 2020 COVID crash.*
+
+---
 
 **Table 1 — Pearson Correlation (Features vs Target)**
 
-| Feature | Pearson Corr. |
-|---------|--------------|
-| SMA14_norm | 0.0214 |
-| RSI14 | −0.0152 |
-| BB_Width | 0.0338 |
-| ATR14 | 0.0119 |
-| ROC10 | 0.0493 |
+| Feature | Pearson Corr. with Target |
+|---------|--------------------------|
+| SMA14_norm | 0.0301 |
+| RSI14 | 0.0385 |
+| BB_Width | 0.0256 |
+| ATR14 | 0.0053 |
+| ROC10 | 0.0208 |
 
-All correlations are below 0.05, consistent with weak-form market efficiency.
-ROC10 shows the highest absolute value, indicating short-term momentum is
-the most informative linear signal among the five features.
+All correlations are below 0.05, consistent with weak-form market efficiency at daily frequency.
+**RSI14 shows the highest absolute correlation (0.0385)**, suggesting short-term price momentum
+is the most informative linear signal among the five features. ATR14 is the weakest at 0.0053,
+confirming that volatility magnitude alone carries minimal directional information.
+
+---
 
 **Table 2 — 5-Fold Cross-Validation (Logistic Regression)**
 
-| Fold | Accuracy | F1-Score |
-|------|----------|----------|
-| 1 | 0.5229 | 0.5361 |
-| 2 | 0.5172 | 0.5287 |
-| 3 | 0.5300 | 0.5418 |
-| 4 | 0.5256 | 0.5372 |
-| 5 | 0.5200 | 0.5326 |
-| **Mean** | **0.5231** | **0.5353** |
+| Fold | Train Size | Test Size | Accuracy | F1-Score |
+|------|-----------|-----------|----------|----------|
+| 1 | 2,801 | 701 | 0.5307 | 0.6389 |
+| 2 | 2,801 | 701 | 0.5278 | 0.4361 |
+| 3 | 2,802 | 700 | 0.5314 | 0.5205 |
+| 4 | 2,802 | 700 | 0.5429 | 0.5543 |
+| 5 | 2,802 | 700 | 0.4971 | 0.5665 |
+| **Mean** | — | — | **0.5260** | **0.5433** |
 
-Average accuracy of ~52.3% modestly exceeds the 50% random baseline.
-Performance is stable across folds (std dev < 0.5 pp).
+Average accuracy of **~52.6%** modestly exceeds the 50% random baseline.
+Accuracy is consistent across folds, with Fold 4 being the strongest (0.5429) and Fold 5
+dipping slightly below random (0.4971), reflecting the inherent noise in short-horizon
+directional prediction. F1-scores show wider variation across folds (0.4361–0.6389),
+indicating sensitivity to the class composition of individual test sets.
+
+---
 
 ### Part 2: News and Text Data
 
-A structured Python workflow was demonstrated using a 15-record sample
-financial news dataset. The sentiment distribution (8 positive, 4 negative,
-3 neutral) and top word frequencies were visualised. The user guide covers
-sources, types, quality considerations, ethical issues, and a literature review.
+**Figure 3 — Exploratory Analysis: Sample Financial News Data**
+
+![Figure 3](outputs/figure3_part2_eda.png)
+
+*Left: Sentiment label distribution (positive=8, negative=5, neutral=2).
+Right: Top 10 most frequent non-trivial words in headlines.
+Source: 15-record sample news dataset covering Chilean market events, January 2023.*
+
+A structured Python workflow was demonstrated using a manually created 15-record
+financial news dataset. The sentiment distribution shows 8 positive, 5 negative, and
+2 neutral labels. The most frequent content words — growth, mining, bank, strong, equity —
+reflect the commodity and macroeconomic focus of Chilean market news coverage.
+The user guide covers sources, types, quality considerations, ethical issues, and a
+literature review.
 
 ---
 
 ## Screenshots
 
-> Add screenshots after running the analysis. Suggested images:
-
-**Figure 1 — ECH Price with 14-Day SMA**
-![Figure 1](outputs/figure1_ech_sma14.png)
-
-**Figure 2 — ECH RSI14 with Thresholds**
-![Figure 2](outputs/figure2_ech_rsi14.png)
-
-**Figure 3 — Part 2 EDA: News Sentiment and Word Frequency**
-![Figure 3](outputs/figure3_part2_eda.png)
-
-> Additional screenshots to add manually:
+> Additional screenshots to add manually after launching the Streamlit app:
 > - `docs/screenshots/app_overview.png` — Streamlit Overview section
 > - `docs/screenshots/app_cv_results.png` — Streamlit CV Results section
 > - `docs/screenshots/app_correlation.png` — Streamlit Correlation section
@@ -214,11 +239,11 @@ After running the analysis and taking screenshots, add the following:
 
 | Image | Source | Purpose |
 |-------|--------|---------|
-| `outputs/figure1_ech_sma14.png` | Auto-generated | ECH price history with SMA |
-| `outputs/figure2_ech_rsi14.png` | Auto-generated | RSI indicator chart |
-| `outputs/figure3_part2_eda.png` | Auto-generated | Part 2 EDA chart |
+| `outputs/figure1_ech_sma14.png` | Auto-generated by `run_analysis.py` | ECH price history with SMA |
+| `outputs/figure2_ech_rsi14.png` | Auto-generated by `run_analysis.py` | RSI indicator chart |
+| `outputs/figure3_part2_eda.png` | Auto-generated by `run_analysis.py` | Part 2 EDA chart |
 | Streamlit homepage screenshot | Manual screenshot | App overview in README |
-| Streamlit CV Results screenshot | Manual screenshot | Key table in README |
+| Streamlit CV Results screenshot | Manual screenshot | CV table in README |
 | Streamlit Correlation screenshot | Manual screenshot | Table 1 in README |
 
 ---
@@ -237,18 +262,18 @@ After running the analysis and taking screenshots, add the following:
 ## Future Improvements
 
 - LASSO feature selection to match the paper's approach
-- Neural network classifier for comparison with baseline
-- Indicator window optimisation via grid search
-- Extend to EQZ and IVV for multi-fund comparison
-- Incorporate news sentiment as an additional model feature
+- Neural network classifier for comparison with the logistic regression baseline
+- Indicator window optimisation via grid search under cross-validation
+- Extend analysis to EQZ and IVV for cross-fund comparison
+- Incorporate daily news sentiment as an additional model feature
 - Walk-forward cross-validation for more realistic deployment simulation
 
 ---
 
 ## Authors
 
-| Name | Role |
-|------|------|
+| Name | Institution |
+|------|-------------|
 | Oluwatobi Dahunsi | WorldQuant University, MScFE |
 | Abhishek Sharma | WorldQuant University, MScFE |
 | Sarafa Busari | WorldQuant University, MScFE |
